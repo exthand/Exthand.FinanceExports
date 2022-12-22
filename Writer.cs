@@ -48,6 +48,9 @@ namespace Exthand.FinanceExports
                 case ExportType.CSV:
                     _exportWriter = new CsvExportWriter(_memoryStream, encoding, _settings);
                     break;
+                case ExportType.MT940:
+                    _exportWriter = new Mt940ExportWriter(_memoryStream, encoding, _settings);
+                    break;
                 default:
                     throw new NotImplementedException();
             }
@@ -57,9 +60,9 @@ namespace Exthand.FinanceExports
         /// Asynchronously writes all Transaction to the stream.
         /// </summary>
         /// <param name="columns">The list of columns to write.</param>
-        public async Task WriteAsync(IEnumerable<Transaction> transactions)
+        public async Task WriteAsync(TransactionList transactionList)
         {
-            await _exportWriter.WriteAsync(transactions);
+            await _exportWriter.WriteAsync(transactionList);
             return;
         }
 

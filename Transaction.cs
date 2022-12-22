@@ -38,12 +38,12 @@ namespace Exthand.FinanceExports
         /// <summary>
         /// Transaction's IBAN human readable name (eg 'Joanna's bank account')
         /// </summary>
-        public string? IBANName { get; set; }
+        public string IBANName { get; set; }
 
         /// <summary>
         /// Transaction's IBAN Bank Account (eg 'BE93012345679')
         /// </summary>
-        public string? IBANAccount { get; set; }
+        public string IBANAccount { get; set; }
 
         /// <summary>
         /// Transaction's bank name (eg 'ING')
