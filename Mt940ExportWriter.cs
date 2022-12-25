@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Exthand.FinanceExports
 {
@@ -31,7 +32,17 @@ namespace Exthand.FinanceExports
 
         private string Clean(string text, int length = 9999)
         {
-            return text.Replace("\n", " / ").Substring(0,length);
+            if (length==9999 || (text.Length<length))
+                return text.Replace("\n", " - ");
+            else
+                return text.Replace("\n", " - ").Substring(0, length);
+        }
+
+        private string GetMoney(decimal amount)
+        {
+            if (amount >= 0)
+                return "C" + Math.Abs(amount).ToString("0.00");
+            return "D" + Math.Abs(amount).ToString("0.00"); 
         }
 
 
@@ -45,7 +56,7 @@ namespace Exthand.FinanceExports
             await _Writer.WriteLineAsync(":20:" + transactionList.transactionId);
             await _Writer.WriteLineAsync(":25:" + transactionList.IBANAccount + transactionList.Currency);
             await _Writer.WriteLineAsync(":28C:00001");
-            if (transactionList.BalanceOpening>0)
+            if (transactionList.BalanceOpening>=0)
             { await _Writer.WriteLineAsync($":60F:C{transactionList.DateFirsTransaction.ToString("yyMMdd")}{transactionList.Currency}{Math.Abs(transactionList.BalanceOpening).ToString("0.00")}"); }
             else
             { await _Writer.WriteLineAsync($":60F:D{transactionList.DateFirsTransaction.ToString("yyMMdd")}{transactionList.Currency}{Math.Abs(transactionList.BalanceOpening).ToString("0.00")}"); } 
@@ -53,15 +64,8 @@ namespace Exthand.FinanceExports
 
             foreach (Transaction transaction in transactionList.transactions)
             {
-                if (transaction.Amount >= 0)
-                {
-                    await _Writer.WriteAsync(":61:" + transaction.DateValue.Value.ToString("yyMMdd") + transaction.DateExecution.Value.ToString("MMdd") + "C");
-                }
-                else
-                {
-                    await _Writer.WriteAsync(":61:" + transaction.DateValue.Value.ToString("yyMMdd") + transaction.DateExecution.Value.ToString("MMdd") + "D");
-                }
-                await _Writer.WriteLineAsync(Math.Abs(transaction.Amount).ToString("0.00") + "N099//" + Clean(transaction.RemittanceUnstructured,16));
+                await _Writer.WriteAsync(":61:" + transaction.DateValue.Value.ToString("yyMMdd") + transaction.DateExecution.Value.ToString("MMdd") + GetMoney(transaction.Amount));
+                await _Writer.WriteLineAsync("N099//" + Clean(transaction.RemittanceUnstructured,16));
                 await _Writer.WriteLineAsync(":86:");
             }
             return;

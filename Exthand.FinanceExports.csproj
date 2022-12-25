@@ -1,12 +1,34 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Nullable>enable</Nullable>
+   <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Jean-Gabriel Debaille</Authors>
+    <Company>EXTHAND SA</Company>
+    <Product>Exthand:Finances Export STD2</Product>
+    <Copyright>EXTHAND 2022</Copyright>
+    <PackageProjectUrl>https:://www.exthand.com</PackageProjectUrl>
+    <PackageIcon>exthandPicto_FB.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/exthand/Exthand.FinanceExports</RepositoryUrl>
+    <RepositoryType>GITHUB</RepositoryType>
+    <PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
+    <Description>This library allows you to generate MT940, CODA, CAMT053, CSV files from bank transactions records.</Description>
+    <PackageTags>psd2 openbanking exthand mt940 camt053 coda</PackageTags>
+    <AssemblyVersion>4.0.5</AssemblyVersion>
+    <FileVersion>4.0.5</FileVersion>
+    <Version>4.0.5</Version>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <LangVersion>latestmajor</LangVersion>
+    <AssemblyName>Exthand.FinanceExports</AssemblyName>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <LangVersion>latestmajor</LangVersion>
-  </PropertyGroup>
+    <ItemGroup>
+    <None Include="exthandPicto_FB.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="Exthand.FinanceExports.csproj" />
+  </ItemGroup>
 </Project>
