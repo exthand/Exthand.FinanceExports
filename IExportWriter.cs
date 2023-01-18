@@ -17,7 +17,7 @@ namespace Exthand.FinanceExports
         /// Asynchronously writes all Transaction to the stream.
         /// </summary>
         /// <param name="columns">The list of columns to write.</param>
-        public Task WriteAsync(TransactionList transactionList);
+        public Task WriteAsync(List<TransactionList> transactionList);
 
 
         /// <summary>

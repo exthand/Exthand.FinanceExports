@@ -65,7 +65,10 @@ namespace Exthand.FinanceExports
 
         private string Clean(string text)
         {
-            return text.Replace("\n", " | ").Replace(_CsvSettings.Delimiter, " ");
+            if (!string.IsNullOrEmpty(text))
+                return text.Replace("\n", " | ").Replace(_CsvSettings.Delimiter, " ");
+            else
+                return "";
         }
 
 
@@ -73,18 +76,21 @@ namespace Exthand.FinanceExports
         /// Asynchronously writes all Transaction to the stream.
         /// </summary>
         /// <param name="columns">The list of columns to write.</param>
-        public async Task WriteAsync(TransactionList transactionList)
+        public async Task WriteAsync(List<TransactionList> transactionListing)
         {
             //TODO: complete this one : WriteHeaders();
 
-            foreach (Transaction transaction in transactionList.transactions)
+            foreach (TransactionList transactionList in transactionListing)
             {
-                transaction.Bank = Clean(transaction.Bank);
-                transaction.CounterpartName = Clean(transaction.CounterpartName);
-                transaction.CounterpartReference = Clean(transaction.CounterpartReference);
-                transaction.IBANName = Clean(transaction.IBANName);
-                transaction.RemittanceUnstructured = Clean(transaction.RemittanceUnstructured);
-                await WriteTransactionAsync(transaction);
+                foreach (Transaction transaction in transactionList.transactions)
+                {
+                    transaction.Bank = Clean(transaction.Bank);
+                    transaction.CounterpartName = Clean(transaction.CounterpartName);
+                    transaction.CounterpartReference = Clean(transaction.CounterpartReference);
+                    transaction.IBANName = Clean(transaction.IBANName);
+                    transaction.RemittanceUnstructured = Clean(transaction.RemittanceUnstructured);
+                    await WriteTransactionAsync(transaction);
+                }
             }
             return;
         }
