@@ -24,7 +24,11 @@ namespace Exthand.FinanceExports
 
         public decimal BalanceClosing { get; set; }
 
-        public DateTime DateOfTransaction { get; set; }
+        public DateTime DateOfRequest { get; set; }
+
+        public DateTime DateOfFirstTransaction { get; set; }
+
+        public DateTime DateOfLastTransaction { get; set; }
 
         public List<Transaction> transactions { get; set; } = new();
 

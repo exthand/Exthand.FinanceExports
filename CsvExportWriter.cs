@@ -76,21 +76,18 @@ namespace Exthand.FinanceExports
         /// Asynchronously writes all Transaction to the stream.
         /// </summary>
         /// <param name="columns">The list of columns to write.</param>
-        public async Task WriteAsync(List<TransactionList> transactionListing)
+        public async Task WriteAsync(TransactionList transactionList)
         {
             //TODO: complete this one : WriteHeaders();
 
-            foreach (TransactionList transactionList in transactionListing)
+            foreach (Transaction transaction in transactionList.transactions)
             {
-                foreach (Transaction transaction in transactionList.transactions)
-                {
-                    transaction.Bank = Clean(transaction.Bank);
-                    transaction.CounterpartName = Clean(transaction.CounterpartName);
-                    transaction.CounterpartReference = Clean(transaction.CounterpartReference);
-                    transaction.IBANName = Clean(transaction.IBANName);
-                    transaction.RemittanceUnstructured = Clean(transaction.RemittanceUnstructured);
-                    await WriteTransactionAsync(transaction);
-                }
+                transaction.Bank = Clean(transaction.Bank);
+                transaction.CounterpartName = Clean(transaction.CounterpartName);
+                transaction.CounterpartReference = Clean(transaction.CounterpartReference);
+                transaction.IBANName = Clean(transaction.IBANName);
+                transaction.RemittanceUnstructured = Clean(transaction.RemittanceUnstructured);
+                await WriteTransactionAsync(transaction);
             }
             return;
         }
