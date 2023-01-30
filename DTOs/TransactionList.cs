@@ -18,6 +18,8 @@ namespace Exthand.FinanceExports
 
         public string IBANAccount { get; set; }
 
+        public string IBANAccountDescription { get; set; }
+
         public string Currency { get; set; }
 
         public decimal BalanceOpening { get; set; }

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <style>
+        table {
+            width: 800px;
+        }
+
+        .borderTop {
+            border-top: 2px solid darkblue;
+        }
+
+        .amount {
+            width: 20%;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .label {
+            vertical-align: top;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <h1>{accountDescription}</h1>
+    <p>{title}</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td class="borderTop label">Opening balance</td>
+                <td class="borderTop">{openingBalanceDate}</td>
+                <td class="borderTop amount">{openingBalanceAmount}</td>
+            </tr>
+            <tr>
+                <td class="label">Closing balance</td>
+                <td>{closingBalanceDate}</td>
+                <td class="amount">{closingBalanceDateAmount}</td>
+            </tr>
+        </thead>
+        <tbody>
+{transactions}
+        </tbody>
+    </table>
+    {footer}
+</body>
+</html>

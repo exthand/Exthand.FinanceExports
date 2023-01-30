@@ -16,6 +16,11 @@ namespace Exthand.FinanceExports
         public string Id { get; set; }
 
         /// <summary>
+        /// Unique sequence ID of this transaction
+        /// </summary>
+        public int Sequence { get; set; }
+
+        /// <summary>
         /// Transaction's identifier provided by the bank.
         /// </summary>
         public string? RemoteId { get; set; }
@@ -69,6 +74,11 @@ namespace Exthand.FinanceExports
         /// Counterpart reference (eg 'CUST001')
         /// </summary>
         public string? CounterpartReference { get; set; }
+
+        /// <summary>
+        /// Counterpart Bank Identifier (BIC) (eg 'CUST001')
+        /// </summary>
+        public string? CounterpartBic { get; set; }
 
         /// <summary>
         /// Counterpart's name (eg 'Company 001')

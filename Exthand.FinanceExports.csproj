@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-   <TargetFramework>netstandard2.0</TargetFramework>
+   <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>9.0</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Jean-Gabriel Debaille</Authors>
@@ -13,16 +13,32 @@
     <RepositoryUrl>https://github.com/exthand/Exthand.FinanceExports</RepositoryUrl>
     <RepositoryType>GITHUB</RepositoryType>
     <PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
-    <Description>This library allows you to generate MT940, CODA, CAMT053, CSV files from bank transactions records.</Description>
+    <Description>This library allows you to generate MT940, CODA, CAMT053, CSV and HTML files from bank transactions records.</Description>
     <PackageTags>psd2 openbanking exthand mt940 camt053 coda</PackageTags>
-    <AssemblyVersion>0.0.5</AssemblyVersion>
-    <FileVersion>0.0.5</FileVersion>
-    <Version>0.0.5</Version>
+    <AssemblyVersion>0.1.1</AssemblyVersion>
+    <FileVersion>0.1.1</FileVersion>
+    <Version>0.1.1</Version>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <LangVersion>latestmajor</LangVersion>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>latestmajor</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Models\" />
+    <None Remove="Models\CAMT\" />
+    <None Remove="Models\CODA\" />
+    <None Remove="Models\CSV\" />
+    <None Remove="Builders\" />
+    <None Remove="Helpers\" />
+    <None Remove="Resources\" />
+    <None Remove="DTOs\" />
+    <None Remove="Resources\codaTransaction.html" />
+    <None Remove="Resources\coda.html" />
+    <None Remove="Resources\camt.053.001.03.xsd" />
+  </ItemGroup>
     <ItemGroup>
     <None Include="exthandPicto_FB.png">
       <Pack>True</Pack>
@@ -32,5 +48,20 @@
   </ItemGroup>
     <ItemGroup>
       <Content Include="README.md" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Models\" />
+      <Folder Include="Models\CAMT\" />
+      <Folder Include="Models\CODA\" />
+      <Folder Include="Models\CSV\" />
+      <Folder Include="Builders\" />
+      <Folder Include="Helpers\" />
+      <Folder Include="Resources\" />
+      <Folder Include="DTOs\" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\codaHtmlTransaction.html" />
+      <EmbeddedResource Include="Resources\codaHtml.html" />
+      <EmbeddedResource Include="Resources\camt.053.001.03.xsd" />
     </ItemGroup>
 </Project>
