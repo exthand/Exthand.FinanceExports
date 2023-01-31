@@ -91,13 +91,14 @@ namespace Exthand.FinanceExports.Builders
         /// </summary>
         private void WriteHeader(TransactionList transactionList)
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append($":20:{transactionList.transactionId}{NewLine}");
-            stringBuilder.Append($":25:{transactionList.IBANAccount}{transactionList.Currency}{NewLine}");
-            stringBuilder.Append($":28C:00001{NewLine}");
-            Mt940Lines.Add(stringBuilder.ToString());
+            string header = $":20:{transactionList.transactionId}";
+            Mt940Lines.Add(header);
+            header = $":25:{transactionList.IBANAccount}{transactionList.Currency}";
+            Mt940Lines.Add(header);
+            header = $":28C:00001";
+            Mt940Lines.Add(header);
             return;
-}
+        }
 
 
         /// <summary>
@@ -105,12 +106,12 @@ namespace Exthand.FinanceExports.Builders
         /// </summary>
         private void WriteBalances(TransactionList transactionList)
         {
-            var stringBuilder = new StringBuilder();
+            string balance = "";
             if (transactionList.BalanceOpening >= 0)
-            { stringBuilder.Append($":60F:C{transactionList.DateOfFirstTransaction:yyMMdd}{transactionList.Currency}{Math.Abs(transactionList.BalanceOpening):0.00}{NewLine}"); }
+            { balance = $":60F:C{transactionList.DateOfFirstTransaction:yyMMdd}{transactionList.Currency}{Math.Abs(transactionList.BalanceOpening):0.00}"; }
             else
-            { stringBuilder.Append($":60F:D{transactionList.DateOfFirstTransaction:yyMMdd}{transactionList.Currency}{Math.Abs(transactionList.BalanceOpening):0.00}{NewLine}"); }
-            Mt940Lines.Add(stringBuilder.ToString());
+            { balance = $":60F:D{transactionList.DateOfFirstTransaction:yyMMdd}{transactionList.Currency}{Math.Abs(transactionList.BalanceOpening):0.00}"; }
+            Mt940Lines.Add(balance);
             return;
         }
 
@@ -119,14 +120,15 @@ namespace Exthand.FinanceExports.Builders
         /// </summary>
         private void WriteTransactions(TransactionList transactionList)
         {
-            var stringBuilder = new StringBuilder();
+            string transactionLine = "";
             foreach (Transaction transaction in transactionList.transactions)
             {
-                stringBuilder.Append($"N099//{Clean(transaction.RemittanceUnstructured, 16)}{NewLine}");
-                stringBuilder.Append($":61:{transaction.DateValue.Value:yyMMdd}{transaction.DateExecution.Value:MMdd}{GetMoney(transaction.Amount)}{NewLine}");
-                stringBuilder.Append($":86:{NewLine}");
+                transactionLine = $":61:{transaction.DateValue.Value:yyMMdd}{transaction.DateExecution.Value:MMdd}{GetMoney(transaction.Amount)}";
+                transactionLine += $"N099//{Clean(transaction.RemittanceUnstructured, 16)}";
+                Mt940Lines.Add(transactionLine);
+                transactionLine = $":86:";
+                Mt940Lines.Add(transactionLine);
             }
-            Mt940Lines.Add(stringBuilder.ToString());
             return;
         }
 
@@ -135,12 +137,12 @@ namespace Exthand.FinanceExports.Builders
         /// </summary>
         private void WriteFooter(TransactionList transactionList)
         {
-            var stringBuilder = new StringBuilder();
+            string footer = "";
             if (transactionList.BalanceClosing >= 0)
-            { stringBuilder.Append($":62F:C{transactionList.DateOfLastTransaction:yyMMdd}{transactionList.Currency}{Math.Abs(transactionList.BalanceClosing).ToString("0.00")}{NewLine}"); }
+            { footer = $":62F:C{transactionList.DateOfLastTransaction:yyMMdd}{transactionList.Currency}{Math.Abs(transactionList.BalanceClosing).ToString("0.00")}"; }
             else
-            { stringBuilder.Append($":62F:D{transactionList.DateOfLastTransaction:yyMMdd)}{transactionList.Currency}{Math.Abs(transactionList.BalanceClosing).ToString("0.00")}{NewLine}"); }
-            Mt940Lines.Add(stringBuilder.ToString());
+            { footer = $":62F:D{transactionList.DateOfLastTransaction:yyMMdd)}{transactionList.Currency}{Math.Abs(transactionList.BalanceClosing).ToString("0.00")}"; }
+            Mt940Lines.Add(footer);
             return;
         }
 

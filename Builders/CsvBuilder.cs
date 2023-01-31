@@ -57,7 +57,7 @@ namespace Exthand.FinanceExports.Builders
             stringBuilder.Append($"{transaction.DateValue?.ToString("yyyyMMdd") + Delimiter}");
 
             stringBuilder.Append($"{transaction.BalanceBefore.ToString() + Delimiter}");
-            stringBuilder.Append($"{transaction.BalanceAfter.ToString()}{Delimiter}{NewLine}");
+            stringBuilder.Append($"{transaction.BalanceAfter.ToString()}{Delimiter}");
 
             return stringBuilder.ToString();
         }
