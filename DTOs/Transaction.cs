@@ -18,7 +18,7 @@ namespace Exthand.FinanceExports
         /// <summary>
         /// Unique sequence ID of this transaction
         /// </summary>
-        public int Sequence { get; set; }
+        public long Sequence { get; set; }
 
         /// <summary>
         /// Transaction's identifier provided by the bank.
