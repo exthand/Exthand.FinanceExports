@@ -1,5 +1,4 @@
-﻿using Exthand.FinanceExports.DTOs;
-using Exthand.FinanceExports.Helpers;
+﻿using Exthand.FinanceExports.Helpers;
 using Exthand.FinanceExports.Models;
 using Exthand.FinanceExports.Models.Camt;
 using Exthand.FinanceExports.Models.Coda;
@@ -110,8 +109,8 @@ namespace Exthand.FinanceExports.Builders
                 CreDtTm = _today,
                 FrToDt = new DateTimePeriodDetails
                 {
-                    FrDtTm = TransactionList.DateOfFirstTransaction,
-                    ToDtTm = TransactionList.DateOfLastTransaction
+                    FrDtTm = TransactionList.DateOfFirstTransaction.Value,
+                    ToDtTm = TransactionList.DateOfLastTransaction.Value
                 },
                 Acct = new CashAccount25
                 {
@@ -155,7 +154,7 @@ namespace Exthand.FinanceExports.Builders
                 CdtDbtInd = (balance?.Amount ?? 0) >= 0 ? CreditDebitCode.CRDT : CreditDebitCode.DBIT,
                 Dt = new DateAndDateTimeChoice
                 {
-                    Item = balance?.ReferenceDate ?? (isOpeningBalance ? TransactionList.DateOfFirstTransaction : TransactionList.DateOfLastTransaction)
+                    Item = balance?.ReferenceDate ?? (isOpeningBalance ? TransactionList.DateOfFirstTransaction.Value : TransactionList.DateOfLastTransaction.Value)
                 }
             };
         }

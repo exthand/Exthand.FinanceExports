@@ -22,15 +22,15 @@ namespace Exthand.FinanceExports
 
         public string Currency { get; set; }
 
-        public decimal BalanceOpening { get; set; }
+        public decimal BalanceOpening { get; set; } = 0;
 
-        public decimal BalanceClosing { get; set; }
+        public decimal BalanceClosing { get; set; } = 0;
 
         public DateTime DateOfRequest { get; set; }
 
-        public DateTime DateOfFirstTransaction { get; set; }
+        public DateTime? DateOfFirstTransaction { get; set; }
 
-        public DateTime DateOfLastTransaction { get; set; }
+        public DateTime? DateOfLastTransaction { get; set; }
 
         public List<Transaction> transactions { get; set; } = new();
 

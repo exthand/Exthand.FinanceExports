@@ -1,7 +1,6 @@
 ﻿using Exthand.FinanceExports.Helpers;
 using Exthand.FinanceExports.Models;
 using Exthand.FinanceExports.Models.Coda;
-using Exthand.FinanceExports.DTOs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +14,6 @@ namespace Exthand.FinanceExports.Builders
     {
         public IList<string> Mt940Lines { get; private set; }
 
-        private string NewLine { get; } = "\n";
         private Account _account;
         private DateTime _now;
 
@@ -47,7 +45,7 @@ namespace Exthand.FinanceExports.Builders
         /// </summary>
         public override string GetResultAsString()
         {
-            return string.Join('\n', Mt940Lines.Select(cl => cl.ToString()));
+            return string.Join(Environment.NewLine, Mt940Lines.Select(cl => cl.ToString()));
         }
 
         /// <summary>
@@ -67,7 +65,7 @@ namespace Exthand.FinanceExports.Builders
 
             foreach (var mt940Line in Mt940Lines)
             {
-                memoryStream.Write(Encoding.UTF8.GetBytes(mt940Line.ToString() + "\n"));
+                memoryStream.Write(Encoding.UTF8.GetBytes(mt940Line.ToString() + Environment.NewLine));
             }
 
             return memoryStream;

@@ -31,10 +31,10 @@ namespace Exthand.FinanceExports.Builders
             Result = Result.Replace("{accountDescription}", TransactionList.IBANAccountDescription);
             Result = Result.Replace("{title}", $"CODA n°{TransactionList.transactionId} - {TransactionList.DateOfFirstTransaction:dd/MM/yyyy}");
 
-            Result = Result.Replace("{openingBalanceDate}", TransactionList.DateOfFirstTransaction.ToString("dd/MM/yyyy"))
+            Result = Result.Replace("{openingBalanceDate}", TransactionList.DateOfFirstTransaction.Value.ToString("dd/MM/yyyy"))
                 .Replace("{openingBalanceAmount}", $"{TransactionList.BalanceOpening.ToString("F2", nfi)} {TransactionList.Currency}");
             
-            Result = Result.Replace("{closingBalanceDate}", TransactionList.DateOfLastTransaction.ToString("dd/MM/yyyy"))
+            Result = Result.Replace("{closingBalanceDate}", TransactionList.DateOfLastTransaction.Value.ToString("dd/MM/yyyy"))
                 .Replace("{closingBalanceDateAmount}", $"{TransactionList.BalanceClosing.ToString("F2", nfi)} {TransactionList.Currency}");
 
             if (TransactionList.transactions.Count() == 0)

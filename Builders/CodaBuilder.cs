@@ -1,7 +1,6 @@
 ﻿using Exthand.FinanceExports.Helpers;
 using Exthand.FinanceExports.Models;
 using Exthand.FinanceExports.Models.Coda;
-using Exthand.FinanceExports.DTOs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -69,7 +68,7 @@ namespace Exthand.FinanceExports.Builders
 
             foreach (var codaLine in CodaLines)
             {
-                memoryStream.Write(Encoding.UTF8.GetBytes(codaLine.ToString() + "\n"));
+                memoryStream.Write(Encoding.UTF8.GetBytes(codaLine.ToString() + Environment.NewLine));
             }
 
             return memoryStream;
@@ -119,7 +118,7 @@ namespace Exthand.FinanceExports.Builders
                 AccountDescription = TransactionList.IBANAccount,
                 AccountHolderName = TransactionList.IBANAccountDescription,
                 Balance = TransactionList.BalanceOpening,
-                BalanceDate = TransactionList.DateOfFirstTransaction,
+                BalanceDate = TransactionList.DateOfFirstTransaction.Value,
                 //TODO: JG : update seq number.
                 SequenceNumber = 0,
                 StatementSequenceNumber = 0
@@ -138,7 +137,7 @@ namespace Exthand.FinanceExports.Builders
             {
                 Account = _account,
                 Balance = TransactionList.BalanceClosing,
-                BalanceDate = TransactionList.DateOfLastTransaction,
+                BalanceDate = TransactionList.DateOfLastTransaction.Value,
                 SequenceNumber = 0,
                 //TODO: JG : update seq number.
                 //SequenceNumber = Request.SequenceNumber,

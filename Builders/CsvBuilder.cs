@@ -17,7 +17,6 @@ namespace Exthand.FinanceExports.Builders
     {
         public IList<string> CsvLines { get; private set; }
         private string Delimiter { get; } = ";";
-        private string NewLine { get; } = "\n";
 
         /// <summary>
         /// Initializes a new <see cref="CsvBuilder"/> instance for the specified file
@@ -26,6 +25,38 @@ namespace Exthand.FinanceExports.Builders
         {
             CsvLines = new List<string>();
             ResetBuilder();
+        }
+
+
+        /// <summary>
+        /// Writes a single header line on top of the file.
+        /// </summary>
+        /// <param name="transaction">One Transaction instance</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        private string WriteHeaders()
+        {
+
+            StringBuilder stringBuilder = new();
+
+            stringBuilder.Append($"ID{Delimiter}");
+            stringBuilder.Append($"Amount{Delimiter}");
+            stringBuilder.Append($"Currency{Delimiter}");
+            stringBuilder.Append($"Name{Delimiter}");
+            stringBuilder.Append($"BankAccount{Delimiter}");
+            stringBuilder.Append($"CounterpartName{Delimiter}");
+            stringBuilder.Append($"CounterpartIBAN{Delimiter}");
+            stringBuilder.Append($"CounterpartReference{Delimiter}");
+            stringBuilder.Append($"RemittanceUnstructured{Delimiter}");
+            stringBuilder.Append($"RemoteId{Delimiter}");
+            stringBuilder.Append($"End2EndId{Delimiter}");
+
+            stringBuilder.Append($"DateExecution{Delimiter}");
+            stringBuilder.Append($"DateValue{Delimiter}");
+
+            stringBuilder.Append($"BalanceBefore{Delimiter}");
+            stringBuilder.Append($"BalanceAfter" );
+
+            return stringBuilder.ToString();
         }
 
         /// <summary>
@@ -57,7 +88,7 @@ namespace Exthand.FinanceExports.Builders
             stringBuilder.Append($"{transaction.DateValue?.ToString("yyyyMMdd") + Delimiter}");
 
             stringBuilder.Append($"{transaction.BalanceBefore.ToString() + Delimiter}");
-            stringBuilder.Append($"{transaction.BalanceAfter.ToString()}{Delimiter}");
+            stringBuilder.Append($"{transaction.BalanceAfter.ToString()}");
 
             return stringBuilder.ToString();
         }
@@ -85,7 +116,7 @@ namespace Exthand.FinanceExports.Builders
         /// <param name="columns">The list of columns to write.</param>
         public override void Build(TransactionList transactionList)
         {
-            //TODO: complete this one : WriteHeaders();
+            CsvLines.Add(WriteHeaders());
 
             foreach (Transaction transaction in transactionList.transactions)
             {
@@ -100,15 +131,15 @@ namespace Exthand.FinanceExports.Builders
         }
 
         /// <summary>
-        /// Get the content of the MT940 file as one string
+        /// Get the content of the CSV file as one string
         /// </summary>
         public override string GetResultAsString()
         {
-            return string.Join('\n', CsvLines.Select(cl => cl.ToString()));
+            return string.Join(Environment.NewLine, CsvLines.Select(cl => cl.ToString()));
         }
 
         /// <summary>
-        /// Get the content of the MT940 file as a collection of strings
+        /// Get the content of the CSV file as a collection of strings
         /// </summary>
         public override IEnumerable<string> GetResultAsLines()
         {
@@ -116,15 +147,15 @@ namespace Exthand.FinanceExports.Builders
         }
 
         /// <summary>
-        /// Get the content of the MT940 file in a stream
+        /// Get the content of the CSV file in a stream
         /// </summary>
         public override Stream GetResultAsStream()
         {
             var memoryStream = new MemoryStream();
 
-            foreach (var mt940Line in CsvLines)
+            foreach (var csvLine in CsvLines)
             {
-                memoryStream.Write(Encoding.UTF8.GetBytes(mt940Line.ToString() + "\n"));
+                memoryStream.Write(Encoding.UTF8.GetBytes(csvLine.ToString() + Environment.NewLine));
             }
 
             return memoryStream;
