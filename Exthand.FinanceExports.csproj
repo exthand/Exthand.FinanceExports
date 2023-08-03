@@ -13,11 +13,12 @@
     <RepositoryUrl>https://github.com/exthand/Exthand.FinanceExports</RepositoryUrl>
     <RepositoryType>GITHUB</RepositoryType>
     <PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
-    <Description>This library allows you to generate MT940, CODA, CAMT053, CSV and HTML files from bank transactions records.</Description>
+    <Description>This library allows you to generate MT940, CODA, CAMT053, CSV, HTML and PDF files from bank transactions records.</Description>
     <PackageTags>psd2 openbanking exthand mt940 camt053 coda</PackageTags>
-    <AssemblyVersion>0.1.11</AssemblyVersion>
-    <FileVersion>0.1.11</FileVersion>
-    <Version>0.1.11</Version>
+    <PackageVersion>0.2.11-alpha</PackageVersion>
+    <AssemblyVersion>0.2.0</AssemblyVersion>
+    <FileVersion>0.2.0</FileVersion>
+    <Version>0.2.0-</Version>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -63,5 +64,9 @@
       <EmbeddedResource Include="Resources\codaHtmlTransaction.html" />
       <EmbeddedResource Include="Resources\codaHtml.html" />
       <EmbeddedResource Include="Resources\camt.053.001.03.xsd" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="itext7.pdfhtml" Version="5.0.1" />
+      <PackageReference Include="itext7.bouncy-castle-adapter" Version="8.0.1" />
     </ItemGroup>
 </Project>

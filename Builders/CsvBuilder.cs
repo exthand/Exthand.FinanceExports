@@ -161,6 +161,12 @@ namespace Exthand.FinanceExports.Builders
             return memoryStream;
         }
 
+        public override byte[] GetResultAsBytes()
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }
 

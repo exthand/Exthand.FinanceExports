@@ -48,7 +48,7 @@ namespace Exthand.FinanceExports.Builders
         /// </summary>
         public override string GetResultAsString()
         {
-            return string.Join('\n', CodaLines.Select(cl => cl.ToString()));
+            return string.Join(Environment.NewLine, CodaLines.Select(cl => cl.ToString()));
         }
 
         /// <summary>
@@ -73,7 +73,10 @@ namespace Exthand.FinanceExports.Builders
 
             return memoryStream;
         }
-
+        public override byte[] GetResultAsBytes()
+        {
+            throw new NotImplementedException();
+        }
 
         #region Private methods
 

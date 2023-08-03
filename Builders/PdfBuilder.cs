@@ -1,5 +1,8 @@
 ﻿using Exthand.FinanceExports.Helpers;
 using Exthand.FinanceExports.Models;
+using iText.Html2pdf;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +12,7 @@ using System.Text;
 
 namespace Exthand.FinanceExports.Builders
 {
-    public class HtmlBuilder : BaseBuilder
+    public class PdfBuilder : BaseBuilder
     {
         public string Result { get; private set; }
 
@@ -69,28 +72,30 @@ namespace Exthand.FinanceExports.Builders
 
         public override IEnumerable<string> GetResultAsLines()
         {
-            return new List<string>
-            {
-                Result
-            };
+            throw new NotImplementedException();
         }
 
         public override Stream GetResultAsStream()
         {
-            var memoryStream = new MemoryStream();
-            memoryStream.Write(Encoding.UTF8.GetBytes(Result));
-            return memoryStream;
-        }
-
-        public override string GetResultAsString()
-        {
-            return Result;
+            throw new NotImplementedException();
         }
 
         public override byte[] GetResultAsBytes()
         {
-            throw new NotImplementedException();
+            var memoryStream = new MemoryStream();
+            ConverterProperties converterProperties = new();
+            PdfWriter pdfWriter = new PdfWriter(memoryStream);
+            pdfWriter.SetCloseStream(false);
+            PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+            pdfDocument.SetDefaultPageSize(PageSize.A4);
+            HtmlConverter.ConvertToPdf(Result, pdfDocument, converterProperties);
+            memoryStream.Position = 0;
+            return memoryStream.ToArray();
         }
 
+        public override string GetResultAsString()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -6,6 +6,7 @@
         CODA = 1,
         CAMT = 2,
         MT940 = 3,
-        CSV = 4
+        CSV = 4,
+        PDF = 5
     }
 }
