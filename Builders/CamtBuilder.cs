@@ -69,10 +69,6 @@ namespace Exthand.FinanceExports.Builders
                 return stringwriter.ToString();
             }
         }
-        public override byte[] GetResultAsBytes()
-        {
-            throw new NotImplementedException();
-        }
 
         #region Private Methods
 

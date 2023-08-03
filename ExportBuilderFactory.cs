@@ -20,8 +20,6 @@ namespace Exthand.FinanceExports
                         return (IBaseExportBuilder<T>)new CodaBuilder();
                     case BuilderOuputType.CSV:
                         return (IBaseExportBuilder<T>)new CsvBuilder();
-                    case BuilderOuputType.PDF:
-                        return (IBaseExportBuilder<T>)new PdfBuilder();
                     case BuilderOuputType.HTML:
                     default:
                         return (IBaseExportBuilder<T>)new HtmlBuilder();

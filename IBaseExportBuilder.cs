@@ -22,9 +22,5 @@ namespace Exthand.FinanceExports
         /// </summary>
         Stream GetResultAsStream();
 
-        /// <summary>
-        /// Get the content of the file in a byte array
-        /// </summary>
-        byte[] GetResultAsBytes();
     }
 }

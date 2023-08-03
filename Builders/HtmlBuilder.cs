@@ -87,10 +87,6 @@ namespace Exthand.FinanceExports.Builders
             return Result;
         }
 
-        public override byte[] GetResultAsBytes()
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

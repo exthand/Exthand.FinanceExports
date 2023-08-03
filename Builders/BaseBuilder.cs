@@ -13,7 +13,5 @@ namespace Exthand.FinanceExports.Builders
         public abstract IEnumerable<string> GetResultAsLines();
         public abstract Stream GetResultAsStream();
         public abstract string GetResultAsString();
-        public abstract byte[] GetResultAsBytes();
-
     }
 }

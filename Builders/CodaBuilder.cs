@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+//TODO: Suppot non Belgian IBANS, add VAT
+
 namespace Exthand.FinanceExports.Builders
 {
     public class CodaBuilder : BaseBuilder
@@ -73,10 +75,7 @@ namespace Exthand.FinanceExports.Builders
 
             return memoryStream;
         }
-        public override byte[] GetResultAsBytes()
-        {
-            throw new NotImplementedException();
-        }
+
 
         #region Private methods
 
