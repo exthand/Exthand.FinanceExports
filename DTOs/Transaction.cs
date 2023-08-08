@@ -61,6 +61,16 @@ namespace Exthand.FinanceExports
         public decimal Amount { get; set; }
 
         /// <summary>
+        /// Balance Before the transaction, in decimal format supporting positive or negative values.
+        /// </summary>
+        public decimal BalanceBefore { get; set; }
+
+        /// <summary>
+        /// Balance after transaction in decimal format supporting positive or negative values.
+        /// </summary>
+        public decimal BalanceAfter { get; set; }
+
+        /// <summary>
         /// Transaction's currency (accepted current value is 'EUR')
         /// </summary>
         public string? Currency { get; set; } = "EUR";
@@ -124,9 +134,6 @@ namespace Exthand.FinanceExports
         /// </summary>
         public string? End2EndId { get; set; }
 
-
-        public decimal? BalanceBefore { get; set; }
-        public decimal? BalanceAfter { get; set; }
     }
 }
 
