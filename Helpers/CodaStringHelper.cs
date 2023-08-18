@@ -41,6 +41,7 @@ namespace Exthand.FinanceExports.Helpers
         /// </summary>
         public static string Truncate(string value, int maxChars)
         {
+            value = value.Replace('\r', ' ').Replace('\n', ' ');
             return value.Length <= maxChars ? value : value.Substring(0, maxChars);
         }
 
@@ -52,6 +53,8 @@ namespace Exthand.FinanceExports.Helpers
         {
             if (value == null)
                 return new string(paddingChar, maxChars);
+
+            value = value.Replace('\r', ' ').Replace('\n', ' ');
 
             if (value.Length == maxChars)
                 return value;
@@ -71,6 +74,8 @@ namespace Exthand.FinanceExports.Helpers
             if (value == null)
                 return new string(paddingChar, maxChars);
 
+            value = value.Replace('\r', ' ').Replace('\n', ' ');
+
             if (value.Length == maxChars)
                 return value;
 
@@ -86,6 +91,8 @@ namespace Exthand.FinanceExports.Helpers
             {
                 return string.Empty;
             }
+
+            value = value.Replace('\r', ' ').Replace('\n', ' ');
 
             var valueLength = value.Length;
 
