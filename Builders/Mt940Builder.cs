@@ -89,7 +89,7 @@ namespace Exthand.FinanceExports.Builders
         /// </summary>
         private void WriteHeader(TransactionList transactionList)
         {
-            string header = $":20:{transactionList.transactionId}";
+            string header = $":20:{transactionList.TransactionId}";
             Mt940Lines.Add(header);
             header = $":25:{transactionList.IBANAccount}{transactionList.Currency}";
             Mt940Lines.Add(header);
@@ -119,7 +119,7 @@ namespace Exthand.FinanceExports.Builders
         private void WriteTransactions(TransactionList transactionList)
         {
             string transactionLine = "";
-            foreach (Transaction transaction in transactionList.transactions)
+            foreach (Transaction transaction in transactionList.Transactions)
             {
                 transactionLine = $":61:{transaction.DateValue.Value:yyMMdd}{transaction.DateExecution.Value:MMdd}{GetMoney(transaction.Amount)}";
                 transactionLine += $"N099//{Clean(transaction.RemittanceUnstructured, 16)}";

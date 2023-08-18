@@ -14,7 +14,13 @@ namespace Exthand.FinanceExports
         /// <summary>
         /// Unique identifier for this export (max length 16 CHAR).
         /// </summary>
-        public string transactionId { get; set; }
+        public string TransactionId { get; set; }
+
+        public string CompanyName { get; set; }
+
+        public int CompanyVAT { get; set; }
+
+        public string BankBIC { get; set; }
 
         public string IBANAccount { get; set; }
 
@@ -32,7 +38,7 @@ namespace Exthand.FinanceExports
 
         public DateTime? DateOfLastTransaction { get; set; }
 
-        public List<Transaction> transactions { get; set; } = new();
+        public List<Transaction> Transactions { get; set; } = new();
 
     }
 }

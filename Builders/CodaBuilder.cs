@@ -101,7 +101,7 @@ namespace Exthand.FinanceExports.Builders
                 FileReference = null,
                 AccountHolderName = TransactionList.IBANAccountDescription,
                 Bic = "", // TODO
-                CompanyNumber = 0,
+                CompanyNumber = TransactionList.CompanyVAT,
                 SeparateApplication = 0,
                 TransactionReference = null,
                 RelatedReference = null
@@ -122,10 +122,8 @@ namespace Exthand.FinanceExports.Builders
                 Balance = TransactionList.BalanceOpening,
                 BalanceDate = TransactionList.DateOfFirstTransaction.Value,
                 //TODO: JG : update seq number.
-                SequenceNumber = 0,
+                SequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear,
                 StatementSequenceNumber = 0
-                //SequenceNumber = Request.SequenceNumber,
-                //StatementSequenceNumber = Request.SequenceNumber
             });
         }
 
@@ -156,8 +154,8 @@ namespace Exthand.FinanceExports.Builders
             CodaLines.Add(new CodaLineType9
             {
                 NumberOfRecors = CodaLines.Count(l => CodaLineHelper.IsRecordLine(l.GetCodaLineType())),
-                CreditMovement = TransactionList.transactions.Where(tr => tr.Amount > 0).Select(tr => tr.Amount).Sum(),
-                DebitMovement = TransactionList.transactions.Where(tr => tr.Amount < 0).Select(tr => tr.Amount).Sum(),
+                CreditMovement = TransactionList.Transactions.Where(tr => tr.Amount > 0).Select(tr => tr.Amount).Sum(),
+                DebitMovement = TransactionList.Transactions.Where(tr => tr.Amount < 0).Select(tr => tr.Amount).Sum(),
                 MultipleFiles = false
             });
         }
@@ -192,7 +190,7 @@ namespace Exthand.FinanceExports.Builders
         {
             var contSeqNbr = 1;
             
-            foreach (var transaction in TransactionList.transactions)
+            foreach (var transaction in TransactionList.Transactions)
             {
                 var communication = transaction.RemittanceStructuredRef ?? transaction.RemittanceUnstructured ?? (transaction.RemittanceUnstructured ?? "").Replace("\n", " ");
                 var hasDetailedCommunication = transaction.RemittanceUnstructured != null && (transaction.RemittanceUnstructured.Length > 53 || transaction.RemittanceUnstructured.Contains("\n"));

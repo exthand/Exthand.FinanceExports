@@ -101,7 +101,7 @@ namespace Exthand.FinanceExports.Builders
         {
             return new AccountStatement3
             {
-                Id = TransactionList.transactionId + "-000001",
+                Id = TransactionList.TransactionId + "-000001",
                 ElctrncSeqNb = 0,
                 ElctrncSeqNbSpecified = true,
                 LglSeqNb = 0,
@@ -162,13 +162,13 @@ namespace Exthand.FinanceExports.Builders
 
         private TotalTransactions2 GetTransactionSummary()
         {
-            var sum = TransactionList.transactions.Sum(t => t.Amount);
+            var sum = TransactionList.Transactions.Sum(t => t.Amount);
 
             var summary = new TotalTransactions2
             {
                 TtlNtries = new NumberAndSumOfTransactions2
                 {
-                    NbOfNtries = $"{TransactionList.transactions.Count()}",
+                    NbOfNtries = $"{TransactionList.Transactions.Count()}",
                     Sum = Math.Abs(sum),
                     SumSpecified = true,
                     TtlNetNtryAmt = Math.Abs(sum),
@@ -178,18 +178,18 @@ namespace Exthand.FinanceExports.Builders
                 }
             };
 
-            var sumCredit = TransactionList.transactions.Where(t => t.Amount >= 0).Sum(t => t.Amount);
+            var sumCredit = TransactionList.Transactions.Where(t => t.Amount >= 0).Sum(t => t.Amount);
             summary.TtlCdtNtries = new NumberAndSumOfTransactions1
             {
-                NbOfNtries = $"{TransactionList.transactions.Where(t => t.Amount >= 0).Count()}",
+                NbOfNtries = $"{TransactionList.Transactions.Where(t => t.Amount >= 0).Count()}",
                 Sum = Math.Abs(sumCredit),
                 SumSpecified = true
             };
             
-            var sumDebit = TransactionList.transactions.Where(t => t.Amount < 0).Sum(t => t.Amount);
+            var sumDebit = TransactionList.Transactions.Where(t => t.Amount < 0).Sum(t => t.Amount);
             summary.TtlDbtNtries = new NumberAndSumOfTransactions1
             {
-                NbOfNtries = $"{TransactionList.transactions.Where(t => t.Amount < 0).Count()}",
+                NbOfNtries = $"{TransactionList.Transactions.Where(t => t.Amount < 0).Count()}",
                 Sum = Math.Abs(sumDebit),
                 SumSpecified = true
             };
@@ -199,7 +199,7 @@ namespace Exthand.FinanceExports.Builders
 
         private IEnumerable<ReportEntry3> GetEntries()
         {
-            return TransactionList.transactions.Select(GetEntry);
+            return TransactionList.Transactions.Select(GetEntry);
         }
 
         private ReportEntry3 GetEntry(Transaction transaction)

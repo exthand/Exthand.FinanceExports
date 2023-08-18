@@ -30,7 +30,7 @@ namespace Exthand.FinanceExports.Builders
 
             Result = EmbeddedResourceHelper.GetEmbeddedResource("Resources.codaHtml.html");
             Result = Result.Replace("{accountDescription}", TransactionList.IBANAccountDescription);
-            Result = Result.Replace("{title}", $"CODA n°{TransactionList.transactionId} - {TransactionList.DateOfFirstTransaction:dd/MM/yyyy}");
+            Result = Result.Replace("{title}", $"CODA n°{TransactionList.TransactionId} - {TransactionList.DateOfFirstTransaction:dd/MM/yyyy}");
 
             Result = Result.Replace("{openingBalanceDate}", TransactionList.DateOfFirstTransaction.Value.ToString("dd/MM/yyyy"))
                 .Replace("{openingBalanceAmount}", $"{TransactionList.BalanceOpening.ToString("F2", nfi)} {TransactionList.Currency}");
@@ -38,7 +38,7 @@ namespace Exthand.FinanceExports.Builders
             Result = Result.Replace("{closingBalanceDate}", TransactionList.DateOfLastTransaction.Value.ToString("dd/MM/yyyy"))
                 .Replace("{closingBalanceDateAmount}", $"{TransactionList.BalanceClosing.ToString("F2", nfi)} {TransactionList.Currency}");
 
-            if (TransactionList.transactions.Count() == 0)
+            if (TransactionList.Transactions.Count() == 0)
             {
                 Result = Result.Replace("{transactions}", string.Empty);
             }
@@ -47,7 +47,7 @@ namespace Exthand.FinanceExports.Builders
                 var htmlTransaction = EmbeddedResourceHelper.GetEmbeddedResource("Resources.codaHtmlTransaction.html");
                 var stringBuilder = new StringBuilder();
 
-                foreach (var transaction in TransactionList.transactions)
+                foreach (var transaction in TransactionList.Transactions)
                 {
                     var communication = transaction.RemittanceStructuredRef ?? transaction.RemittanceUnstructured;
 

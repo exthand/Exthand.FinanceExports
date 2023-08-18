@@ -118,7 +118,7 @@ namespace Exthand.FinanceExports.Builders
         {
             CsvLines.Add(WriteHeaders());
 
-            foreach (Transaction transaction in transactionList.transactions)
+            foreach (Transaction transaction in transactionList.Transactions)
             {
                 transaction.Bank = Clean(transaction.Bank);
                 transaction.CounterpartName = Clean(transaction.CounterpartName);
