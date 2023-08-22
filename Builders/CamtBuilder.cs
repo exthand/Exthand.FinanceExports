@@ -254,8 +254,9 @@ namespace Exthand.FinanceExports.Builders
             {
                 Refs = new TransactionReferences3
                 {
-                    MsgId = transaction.Sequence.ToString("N"),
-                    TxId = transaction.Sequence.ToString("N"),
+                    MsgId = transaction.Sequence.ToString(),
+                    TxId = transaction.Sequence.ToString(),
+                    EndToEndId = transaction.End2EndId
                 },
                 AmtDtls = new AmountAndCurrencyExchange3
                 {
@@ -361,7 +362,8 @@ namespace Exthand.FinanceExports.Builders
 
                 if (!string.IsNullOrEmpty(transaction.RemittanceUnstructured))
                 {
-                    details.RmtInf.Ustrd = new string[] { transaction.RemittanceUnstructured };
+                    details.RmtInf.Ustrd = new string[]
+                        { transaction.RemittanceUnstructured.Replace('\r','_').Replace('\n','_') };
                 }
             }
 

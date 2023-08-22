@@ -41,7 +41,7 @@ namespace Exthand.FinanceExports.Helpers
         /// </summary>
         public static string Truncate(string value, int maxChars)
         {
-            value = value.Replace('\r', ' ').Replace('\n', ' ');
+            value = value.Replace('\r', '_').Replace('\n', '_');
             return value.Length <= maxChars ? value : value.Substring(0, maxChars);
         }
 
@@ -54,7 +54,7 @@ namespace Exthand.FinanceExports.Helpers
             if (value == null)
                 return new string(paddingChar, maxChars);
 
-            value = value.Replace('\r', ' ').Replace('\n', ' ');
+            value = value.Replace('\r', '_').Replace('\n', '_');
 
             if (value.Length == maxChars)
                 return value;
@@ -74,7 +74,7 @@ namespace Exthand.FinanceExports.Helpers
             if (value == null)
                 return new string(paddingChar, maxChars);
 
-            value = value.Replace('\r', ' ').Replace('\n', ' ');
+            value = value.Replace('\r', '_').Replace('\n', '_');
 
             if (value.Length == maxChars)
                 return value;
@@ -92,7 +92,7 @@ namespace Exthand.FinanceExports.Helpers
                 return string.Empty;
             }
 
-            value = value.Replace('\r', ' ').Replace('\n', ' ');
+            value = value.Replace('\r', '_').Replace('\n', '_');
 
             var valueLength = value.Length;
 
