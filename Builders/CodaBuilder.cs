@@ -192,8 +192,9 @@ namespace Exthand.FinanceExports.Builders
             
             foreach (var transaction in TransactionList.Transactions)
             {
-                var communication = transaction.RemittanceStructuredRef ?? transaction.RemittanceUnstructured ?? (transaction.RemittanceUnstructured ?? "").Replace("\n", " ");
-                var hasDetailedCommunication = transaction.RemittanceUnstructured != null && (transaction.RemittanceUnstructured.Length > 53 || transaction.RemittanceUnstructured.Contains("\n"));
+                var communication = transaction.RemittanceStructuredRef ?? transaction.RemittanceUnstructured ?? (transaction.RemittanceUnstructured ?? "");
+                bool hasDetailedCommunication = transaction.RemittanceUnstructured != null && (transaction.RemittanceUnstructured.Length > 53 || transaction.RemittanceUnstructured.Contains("\n"));
+                bool hasURL = !(string.IsNullOrEmpty(transaction.URLExtended)) ? true : false;
                 var communicationType = transaction.RemittanceUnstructured != null
                     ? CommunicationType.Structured
                     : CommunicationType.Unstructured;
@@ -296,6 +297,21 @@ namespace Exthand.FinanceExports.Builders
 
                 detailNumber++;
             }
+
+            if (!string.IsNullOrEmpty(transaction.URLExtended))
+            {
+                CodaLines.Add(new CodaLineType31
+                {
+                    ContinuousSequenceNumber = contSeqNbr % 10000,
+                    DetailNumber = detailNumber % 10000,
+                    Communication = transaction.URLExtended,
+                    BankReferenceNumber = null,
+                    CommunicationType = CommunicationType.Unstructured,
+                    NextCode = false,
+                    LinkCode = false
+                });
+            }
+
         }
 
         #endregion

@@ -134,6 +134,12 @@ namespace Exthand.FinanceExports
         /// </summary>
         public string? End2EndId { get; set; }
 
+
+        /// <summary>
+        /// URL for extendced information.
+        /// </summary>
+        public string? URLExtended { get; set; }
+
     }
 }
 
