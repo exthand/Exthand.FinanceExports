@@ -13,34 +13,28 @@
             padding: 16px 16px 16px 16px;
         }
 
-        table {
-            width: 800px;
-        }
-
         .borderTop {
             border-top: 2px solid darkblue;
         }
 
         .amount {
-            width: 20%;
             text-align: right;
             font-weight: bold;
         }
 
         .label {
             vertical-align: top;
-            width: 30%;
         }
     </style>
 </head>
 <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%;">
         <tr>
-            <td colspan="2">
+            <td>
                 <img src="https://www.mybanks.io/img/mybanxio-black-400-x.png" width="150" style="margin: 0; border: 0; padding: 0; display: block; width: 150px ">
             </td>
-            <td style="width:200px;text-align:right">
-                <h2>{accountDescription}</h2><p>{title}</p>
+            <td style="text-align:right">
+                <h2>{accountDescription}</h2><p>{iban}{title}</p>
             </td>
         </tr>
         <tr>
@@ -48,11 +42,11 @@
                 <table  cellspacing="0" cellpadding="0" style="width: 100%;">
                     <tr>
                         <td class="borderTop label">Opening balance of {openingBalanceDate}</td>
-                        <td class="borderTop amount" coslspan="2">{openingBalanceAmount}</td>
+                        <td class="borderTop amount" colspan="2">{openingBalanceAmount}</td>
                     </tr>
                     <tr>
                         <td class="label">Closing balance of {closingBalanceDate}</td>
-                        <td class="amount" coslspan="2">{closingBalanceDateAmount}</td>
+                        <td class="amount" colspan="2">{closingBalanceDateAmount}</td>
                     </tr>
                     <tbody>
                         {transactions}

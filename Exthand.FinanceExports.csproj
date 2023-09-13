@@ -6,16 +6,16 @@
     <Authors>Jean-Gabriel Debaille</Authors>
     <Company>EXTHAND SA</Company>
     <Product>Exthand:Finances Export STD2</Product>
-    <Copyright>EXTHAND 2022</Copyright>
-    <PackageProjectUrl>https:://www.exthand.com</PackageProjectUrl>
-    <PackageIcon>exthandPicto_FB.png</PackageIcon>
+    <Copyright>EXTHAND 2023</Copyright>
+    <PackageProjectUrl>https://www.exthand.com</PackageProjectUrl>
+    <PackageIcon>logo-240.png</PackageIcon>
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/exthand/Exthand.FinanceExports</RepositoryUrl>
     <RepositoryType>GITHUB</RepositoryType>
     <PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
     <Description>This library allows you to generate MT940, CODA, CAMT053, CSV, HTML and PDF files from bank transactions records.</Description>
     <PackageTags>psd2 openbanking exthand mt940 camt053 coda</PackageTags>
-    <PackageVersion>0.2.17</PackageVersion>
+    <PackageVersion>0.2.24</PackageVersion>
     <AssemblyVersion>0.2.0</AssemblyVersion>
     <FileVersion>0.2.0</FileVersion>
     <Version>0.2.0-</Version>
@@ -41,7 +41,7 @@
     <None Remove="Resources\camt.053.001.03.xsd" />
   </ItemGroup>
     <ItemGroup>
-    <None Include="exthandPicto_FB.png">
+    <None Include="logo-240.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

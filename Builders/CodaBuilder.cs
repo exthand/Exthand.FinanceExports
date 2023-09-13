@@ -120,7 +120,7 @@ namespace Exthand.FinanceExports.Builders
                 AccountDescription = TransactionList.IBANAccount,
                 AccountHolderName = TransactionList.IBANAccountDescription,
                 Balance = TransactionList.BalanceOpening,
-                BalanceDate = TransactionList.DateOfFirstTransaction.Value,
+                BalanceDate = TransactionList.DateOfFirstTransaction.Value.AddDays(-1),
                 //TODO: JG : update seq number.
                 SequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear,
                 StatementSequenceNumber = 0
@@ -196,8 +196,8 @@ namespace Exthand.FinanceExports.Builders
                 bool hasDetailedCommunication = transaction.RemittanceUnstructured != null && (transaction.RemittanceUnstructured.Length > 53 || transaction.RemittanceUnstructured.Contains("\n"));
                 bool hasURL = !(string.IsNullOrEmpty(transaction.URLExtended)) ? true : false;
                 var communicationType = transaction.RemittanceUnstructured != null
-                    ? CommunicationType.Structured
-                    : CommunicationType.Unstructured;
+                    ? CommunicationType.Unstructured
+                    : CommunicationType.Structured;
                 
                 GenerateTransactionRecord21(transaction, contSeqNbr, communication, communicationType, false, true);
                 bool gotCounterpart = !string.IsNullOrEmpty(transaction.CounterpartName) ||
@@ -292,7 +292,7 @@ namespace Exthand.FinanceExports.Builders
                     BankReferenceNumber = null,
                     CommunicationType = CommunicationType.Unstructured,
                     NextCode = false,
-                    LinkCode = i < (splittedCommunication.Length - 1)
+                    LinkCode = (i < (splittedCommunication.Length - 1) || !string.IsNullOrEmpty(transaction.URLExtended))
                 });
 
                 detailNumber++;
