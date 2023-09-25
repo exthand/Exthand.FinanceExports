@@ -230,6 +230,7 @@ namespace Exthand.FinanceExports.Builders
                 ValueDate = transaction.DateValue,
                 TransactionCode = 0,
                 CommunicationType = communicationType,
+                StructuredCommunicationType = communicationType == CommunicationType.Structured ? "101" : "",
                 Communication = communication,
                 EntryDate = transaction.DateExecution,
                 SequenceNumberStatement = 1,

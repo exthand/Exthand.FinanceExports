@@ -32,6 +32,7 @@ namespace Exthand.FinanceExports.Models.Coda
     ///               0 = unstructured
     ///               1 = structured
     /// I - 53 AN - Communication zone
+    ///   -  3  N - If H == 1 (101 Default in Belgium)
     /// J -  6  N - Entry Date ddMMyy
     /// K -  3  N - Sequence number statement
     /// L -  1  N - Globalisation code
@@ -51,6 +52,7 @@ namespace Exthand.FinanceExports.Models.Coda
         public DateTime? ValueDate { get; set; }
         public int TransactionCode { get; set; }
         public CommunicationType CommunicationType { get; set; }
+        public string StructuredCommunicationType { get; set; }
         public string Communication { get; set; }
         public DateTime? EntryDate { get; set; }
         public int SequenceNumberStatement { get; set; }
