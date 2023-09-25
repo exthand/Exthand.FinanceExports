@@ -50,14 +50,14 @@ namespace Exthand.FinanceExports.Builders
 
                 foreach (var transaction in TransactionList.Transactions)
                 {
-                    var communication = transaction.RemittanceStructuredRef ?? transaction.RemittanceUnstructured;
+                    var communication = transaction.RemittanceUnstructured + "<br/>" + transaction.RemittanceStructuredRef;
 
                     var resultTransaction = htmlTransaction
                         .Replace("{transactionId}", $"{transaction.Id}")
                         .Replace("{amount}", $"{transaction.Amount.ToString("F2", nfi)} {transaction.Currency}")
                         .Replace("{executionDate}", transaction.DateExecution?.ToString("dd/MM/yyyy") ?? "N/A")
                         .Replace("{valueDate}", transaction.DateValue?.ToString("dd/MM/yyyy") ?? "N/A")
-                        .Replace("{communication}", communication?.Replace("\n", "<br />") ?? "N/A");
+                        .Replace("{communication}", communication?.Replace("\n", "<br/>") ?? "N/A");
 
                     stringBuilder.Append(resultTransaction);
                 }
