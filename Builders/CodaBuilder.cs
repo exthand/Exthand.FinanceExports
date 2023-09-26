@@ -138,9 +138,7 @@ namespace Exthand.FinanceExports.Builders
                 Account = _account,
                 Balance = TransactionList.BalanceClosing,
                 BalanceDate = TransactionList.DateOfLastTransaction.Value,
-                SequenceNumber = 0,
-                //TODO: JG : update seq number.
-                //SequenceNumber = Request.SequenceNumber,
+                SequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear,
                 LinkCode = false
             });
         }
@@ -178,7 +176,7 @@ namespace Exthand.FinanceExports.Builders
                 SequenceNumber = 1,
                 DetailNumber = 1,
                 Communication = $"AccountID: {TransactionList.IBANAccount}",
-                LinkCode = true
+                LinkCode = false
             });
 
         }
