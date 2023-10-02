@@ -46,7 +46,7 @@ namespace Exthand.FinanceExports.Models.Coda
             stringBuilder.Append("23");
             stringBuilder.Append($"{ContinuousSequenceNumber:0000}");
             stringBuilder.Append($"{DetailNumber:0000}");
-            stringBuilder.Append(CounterpartyAccount.AccountNumberAndCurrencyToString());
+            stringBuilder.Append(CodaStringHelper.TrucateOrPadRight(CounterpartyAccount.AccountNumberAndCurrencyToString(), 37));
             stringBuilder.Append(CodaStringHelper.TrucateOrPadRight(CounterpartyName, 35));
             stringBuilder.Append(CodaStringHelper.TrucateOrPadRight(CodaStringHelper.Substring(Communication, 53+53, 43), 43));
             stringBuilder.Append("0 ");
