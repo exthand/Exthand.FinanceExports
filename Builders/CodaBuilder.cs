@@ -120,7 +120,7 @@ namespace Exthand.FinanceExports.Builders
                 AccountDescription = TransactionList.IBANAccount,
                 AccountHolderName = TransactionList.IBANAccountDescription,
                 Balance = TransactionList.BalanceOpening,
-                BalanceDate = TransactionList.DateOfFirstTransaction.Value.AddDays(-1),
+                BalanceDate = TransactionList.DateOfFirstTransaction.Value,
                 //TODO: JG : update seq number.
                 SequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear,
                 StatementSequenceNumber = 0
