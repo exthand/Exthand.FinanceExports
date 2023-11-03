@@ -101,7 +101,7 @@ namespace Exthand.FinanceExports.Builders
                 FileReference = null,
                 AccountHolderName = TransactionList.IBANAccountDescription,
                 Bic = "", // TODO
-                CompanyNumber = TransactionList.CompanyVAT,
+                CompanyNumber = int.Parse(TransactionList.CompanyVAT.Replace(" ","").Replace(".","").Remove(0,2)),
                 SeparateApplication = 0,
                 TransactionReference = null,
                 RelatedReference = null
