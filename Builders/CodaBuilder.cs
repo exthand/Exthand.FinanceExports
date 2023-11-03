@@ -228,7 +228,7 @@ namespace Exthand.FinanceExports.Builders
                 StructuredCommunicationType = communicationType == CommunicationType.Structured ? "101" : "",
                 Communication = communication,
                 EntryDate = transaction.DateExecution,
-                SequenceNumberStatement = 1,
+                SequenceNumberStatement = TransactionList.DateOfFirstTransaction.Value.DayOfYear,
                 NextCode = nextCode,
                 LinkCode = hasDetailedCommunication
             });
