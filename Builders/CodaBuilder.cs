@@ -118,10 +118,9 @@ namespace Exthand.FinanceExports.Builders
                 AccountDescription = TransactionList.IBANAccount,
                 AccountHolderName = TransactionList.IBANAccountDescription,
                 Balance = TransactionList.BalanceOpening,
-                BalanceDate = TransactionList.DateOfFirstTransaction.Value,
-                //TODO: JG : update seq number.
+                BalanceDate = TransactionList.DateOfFirstTransaction.Value.AddDays(-1),
                 SequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear,
-                StatementSequenceNumber = 0
+                StatementSequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear
             });
         }
 
@@ -165,7 +164,7 @@ namespace Exthand.FinanceExports.Builders
             {
                 SequenceNumber = 1,
                 DetailNumber = 0,
-                Communication = "EXTHAND.COM CODA GENERATOR V0.2",
+                Communication = "EXTHAND.COM CODA GENERATOR V1.0",
                 LinkCode = true
             });
 
