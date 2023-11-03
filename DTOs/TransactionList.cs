@@ -18,7 +18,7 @@ namespace Exthand.FinanceExports
 
         public string CompanyName { get; set; }
 
-        public string CompanyVAT { get; set; }
+        public int CompanyVAT { get; set; }
 
         public string BankBIC { get; set; }
 
