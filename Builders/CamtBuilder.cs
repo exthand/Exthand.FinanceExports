@@ -109,7 +109,7 @@ namespace Exthand.FinanceExports.Builders
                 CreDtTm = _today,
                 FrToDt = new DateTimePeriodDetails
                 {
-                    FrDtTm = TransactionList.DateOfFirstTransaction.Value,
+                    FrDtTm = TransactionList.DateOfFirstTransaction.Value.AddDays(-1),
                     ToDtTm = TransactionList.DateOfLastTransaction.Value
                 },
                 Acct = new CashAccount25
@@ -130,8 +130,8 @@ namespace Exthand.FinanceExports.Builders
         {
             return new List<CashBalance3>
             {
-                GetBalance(new Balance(){Amount = TransactionList.BalanceOpening, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfFirstTransaction}, true),
-                GetBalance(new Balance(){Amount = TransactionList.BalanceClosing, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfLastTransaction}, false)
+                GetBalance(new Balance(){Amount = TransactionList.BalanceOpening, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfFirstTransaction.Value.AddDays(-1)}, true),
+                GetBalance(new Balance(){Amount = TransactionList.BalanceClosing, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfLastTransaction.Value}, false)
             };
         }
 
@@ -154,7 +154,7 @@ namespace Exthand.FinanceExports.Builders
                 CdtDbtInd = (balance?.Amount ?? 0) >= 0 ? CreditDebitCode.CRDT : CreditDebitCode.DBIT,
                 Dt = new DateAndDateTimeChoice
                 {
-                    Item = balance?.ReferenceDate ?? (isOpeningBalance ? TransactionList.DateOfFirstTransaction.Value : TransactionList.DateOfLastTransaction.Value)
+                    Item = balance?.ReferenceDate ?? (isOpeningBalance ? TransactionList.DateOfFirstTransaction.Value.AddDays(-1) : TransactionList.DateOfLastTransaction.Value)
                 }
             };
         }
