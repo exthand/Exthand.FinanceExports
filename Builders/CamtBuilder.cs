@@ -109,8 +109,8 @@ namespace Exthand.FinanceExports.Builders
                 CreDtTm = _today,
                 FrToDt = new DateTimePeriodDetails
                 {
-                    FrDtTm = TransactionList.DateOfFirstTransaction.Value.AddDays(-1),
-                    ToDtTm = TransactionList.DateOfLastTransaction.Value
+                    FrDtTm = TransactionList.DateOfFirstTransaction.Value,
+                    ToDtTm = TransactionList.DateOfLastTransaction.Value.AddDays(-1)
                 },
                 Acct = new CashAccount25
                 {
@@ -131,7 +131,7 @@ namespace Exthand.FinanceExports.Builders
             return new List<CashBalance3>
             {
                 GetBalance(new Balance(){Amount = TransactionList.BalanceOpening, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfFirstTransaction.Value.AddDays(-1)}, true),
-                GetBalance(new Balance(){Amount = TransactionList.BalanceClosing, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfLastTransaction.Value}, false)
+                GetBalance(new Balance(){Amount = TransactionList.BalanceClosing, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfLastTransaction.Value.AddDays(-1)}, false)
             };
         }
 
