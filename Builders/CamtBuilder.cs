@@ -110,7 +110,7 @@ namespace Exthand.FinanceExports.Builders
                 FrToDt = new DateTimePeriodDetails
                 {
                     FrDtTm = TransactionList.DateOfFirstTransaction.Value,
-                    ToDtTm = TransactionList.DateOfLastTransaction.Value.AddDays(-1)
+                    ToDtTm = TransactionList.DateOfLastTransaction.Value
                 },
                 Acct = new CashAccount25
                 {
@@ -364,6 +364,9 @@ namespace Exthand.FinanceExports.Builders
                 {
                     details.RmtInf.Ustrd = new string[]
                         { transaction.RemittanceUnstructured.Replace('\r','_').Replace('\n','_') };
+
+                    // This has been added for KYRIBA compliance reasons.
+                    details.Refs.MsgId = details.RmtInf.Ustrd.ToString();
                 }
             }
 

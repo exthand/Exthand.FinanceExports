@@ -15,7 +15,7 @@
     <PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
     <Description>This library allows you to generate MT940, CODA, CAMT053, CSV, HTML and PDF files from bank transactions records.</Description>
     <PackageTags>psd2 openbanking exthand mt940 camt053 coda</PackageTags>
-    <PackageVersion>1.0.5</PackageVersion>
+    <PackageVersion>1.0.6</PackageVersion>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <FileVersion>1.0.0</FileVersion>
     <Version>1.0.0-</Version>
