@@ -36,7 +36,7 @@ namespace Exthand.FinanceExports.Builders
             Result = Result.Replace("{openingBalanceDate}", TransactionList.DateOfFirstTransaction.Value.ToString("dd/MM/yyyy"))
                 .Replace("{openingBalanceAmount}", $"{TransactionList.BalanceOpening.ToString("F2", nfi)} {TransactionList.Currency}");
             
-            Result = Result.Replace("{closingBalanceDate}", TransactionList.DateOfLastTransaction.Value.ToString("dd/MM/yyyy"))
+            Result = Result.Replace("{closingBalanceDate}", TransactionList.DateOfLastTransaction.Value.AddDays(-1).ToString("dd/MM/yyyy"))
                 .Replace("{closingBalanceDateAmount}", $"{TransactionList.BalanceClosing.ToString("F2", nfi)} {TransactionList.Currency}");
 
             if (TransactionList.Transactions.Count() == 0)
@@ -65,7 +65,7 @@ namespace Exthand.FinanceExports.Builders
                 Result = Result.Replace("{transactions}", stringBuilder.ToString());
             }
 
-            Result = Result.Replace("{footer}", "");
+            Result = Result.Replace("{footer}", transactionList.htmlFooterText);
         }
 
         public override IEnumerable<string> GetResultAsLines()

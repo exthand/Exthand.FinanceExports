@@ -40,6 +40,8 @@ namespace Exthand.FinanceExports
 
         public List<Transaction> Transactions { get; set; } = new();
 
+        public string htmlFooterText { get; set; } = "";
+
     }
 }
 

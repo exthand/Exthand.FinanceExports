@@ -82,7 +82,7 @@ namespace Exthand.FinanceExports.Builders
         /// </summary>
         private void ResetBuilder()
         {
-            CodaLines.Clear();
+            CodaLines = new List<ICodaLineType>();
             _account = null;
             _now = DateTime.Now;
         }
@@ -118,7 +118,7 @@ namespace Exthand.FinanceExports.Builders
                 AccountDescription = TransactionList.IBANAccount,
                 AccountHolderName = TransactionList.IBANAccountDescription,
                 Balance = TransactionList.BalanceOpening,
-                BalanceDate = TransactionList.DateOfFirstTransaction.Value.AddDays(-1),
+                BalanceDate = TransactionList.DateOfFirstTransaction.Value,
                 SequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear,
                 StatementSequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear
             });
@@ -134,7 +134,8 @@ namespace Exthand.FinanceExports.Builders
             {
                 Account = _account,
                 Balance = TransactionList.BalanceClosing,
-                BalanceDate = TransactionList.DateOfLastTransaction.Value,
+                // We take dateoffirsttransaction because it's the closing of the same.
+                BalanceDate = TransactionList.DateOfLastTransaction.Value.AddDays(-1),
                 SequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear,
                 LinkCode = false
             });
@@ -164,7 +165,7 @@ namespace Exthand.FinanceExports.Builders
             {
                 SequenceNumber = 1,
                 DetailNumber = 0,
-                Communication = $"EXTHAND.COM CODA GENERATOR V1.0.7 {DateTime.UtcNow.ToString("yyyyMMddHHmmss")}",
+                Communication = $"EXTHAND.COM CODA GENERATOR V1.0.9 {DateTime.UtcNow.ToString("yyyyMMddHHmmss")}",
                 LinkCode = true
             });
 
