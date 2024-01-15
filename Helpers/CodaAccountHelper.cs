@@ -28,7 +28,7 @@ namespace Exthand.FinanceExports.Helpers
                 };
             }
 
-            throw new Exception("Account type not supported");
+            throw new Exception($"Account type not supported '{iban}' - '{currency}'");
         }
     }
 }

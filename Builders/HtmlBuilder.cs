@@ -31,7 +31,7 @@ namespace Exthand.FinanceExports.Builders
             Result = EmbeddedResourceHelper.GetEmbeddedResource("Resources.codaHtml.html");
             Result = Result.Replace("{accountDescription}", TransactionList.IBANAccountDescription);
             Result = Result.Replace("{iban}", TransactionList.IBANAccount);
-            Result = Result.Replace("{title}", $"CODA n°{TransactionList.DateOfFirstTransaction.Value.DayOfYear} - {TransactionList.DateOfFirstTransaction:dd/MM/yyyy}");
+            Result = Result.Replace("{title}", $"CODA n°{TransactionList.Transactions.First().StatementNumber:000} - {TransactionList.DateOfFirstTransaction:dd/MM/yyyy}");
 
             Result = Result.Replace("{openingBalanceDate}", TransactionList.DateOfFirstTransaction.Value.ToString("dd/MM/yyyy"))
                 .Replace("{openingBalanceAmount}", $"{TransactionList.BalanceOpening.ToString("F2", nfi)} {TransactionList.Currency}");

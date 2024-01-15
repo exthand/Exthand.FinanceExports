@@ -140,6 +140,8 @@ namespace Exthand.FinanceExports
         /// </summary>
         public string? URLExtended { get; set; }
 
+        public int StatementNumber { get; set; }
+
     }
 }
 

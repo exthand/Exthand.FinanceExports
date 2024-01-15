@@ -15,6 +15,7 @@ namespace Exthand.FinanceExports.Builders
 
         private Account _account;
         private DateTime _now;
+        private int _sequenceNumber;
 
         /// <summary>
         /// CTOR
@@ -33,6 +34,15 @@ namespace Exthand.FinanceExports.Builders
             TransactionList = transactionList;
             ResetBuilder();
 
+            // We initialize the sequence number.
+            if (transactionList.Transactions.First().StatementNumber == 0)
+            {
+                _sequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear;
+            }
+            else
+            {
+                _sequenceNumber = transactionList.Transactions.First().StatementNumber;
+            }
             _account = CodaAccountHelper.ParseAccount(transactionList.IBANAccount, transactionList.Currency);
 
             GenerateCodaHeader();
@@ -119,8 +129,8 @@ namespace Exthand.FinanceExports.Builders
                 AccountHolderName = TransactionList.IBANAccountDescription,
                 Balance = TransactionList.BalanceOpening,
                 BalanceDate = TransactionList.DateOfFirstTransaction.Value,
-                SequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear,
-                StatementSequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear
+                SequenceNumber = _sequenceNumber,
+                StatementSequenceNumber = _sequenceNumber
             });
         }
 
@@ -136,7 +146,7 @@ namespace Exthand.FinanceExports.Builders
                 Balance = TransactionList.BalanceClosing,
                 // We take dateoffirsttransaction because it's the closing of the same.
                 BalanceDate = TransactionList.DateOfLastTransaction.Value.AddDays(-1),
-                SequenceNumber = TransactionList.DateOfFirstTransaction.Value.DayOfYear,
+                SequenceNumber = _sequenceNumber,
                 LinkCode = false
             });
         }

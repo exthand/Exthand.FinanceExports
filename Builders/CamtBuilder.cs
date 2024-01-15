@@ -349,6 +349,15 @@ namespace Exthand.FinanceExports.Builders
             {
                 details.RmtInf = new RemittanceInformation7();
 
+                if (!string.IsNullOrEmpty(transaction.RemittanceUnstructured))
+                {
+                    details.RmtInf.Ustrd = new string[]
+                        { transaction.RemittanceUnstructured.Replace('\r','_').Replace('\n','_') };
+
+                    // This has been added for KYRIBA compliance reasons.
+                    details.Refs.MsgId = details.RmtInf.Ustrd[0];
+                }
+
                 if (!string.IsNullOrEmpty(transaction.RemittanceStructuredRef))
                 {
                     details.RmtInf.Strd = new StructuredRemittanceInformation9[]
@@ -358,17 +367,11 @@ namespace Exthand.FinanceExports.Builders
                             AddtlRmtInf = new string[] { transaction.RemittanceStructuredRef }
                         }
                     };
+                    details.Refs.MsgId = details.RmtInf.Strd[0].AddtlRmtInf[0];
                 }
 
-                if (!string.IsNullOrEmpty(transaction.RemittanceUnstructured))
-                {
-                    details.RmtInf.Ustrd = new string[]
-                        { transaction.RemittanceUnstructured.Replace('\r','_').Replace('\n','_') };
-
-                    // This has been added for KYRIBA compliance reasons.
-                    details.Refs.MsgId = details.RmtInf.Ustrd.ToString();
-                }
             }
+
 
             return details;
         }
