@@ -8,17 +8,7 @@ namespace Exthand.FinanceExports.Helpers
 
         public static Account ParseAccount(string iban, string currency)
         {
-            if (string.IsNullOrEmpty(iban))
-            {
-                return new Account
-                {
-                    AccountType = CodaAccountType.Unknown,
-                    AccountNumber = "",
-                    CurrencyCode = currency ?? "EUR"
-                };
-            }
-
-            if (iban.Length >= 15 && char.IsLetter(iban[0]) && char.IsLetter(iban[1]))
+            if (!string.IsNullOrEmpty(iban) && iban.Length >= 15 && char.IsLetter(iban[0]) && char.IsLetter(iban[1]))
             {
                 return new Account
                 {
@@ -28,7 +18,12 @@ namespace Exthand.FinanceExports.Helpers
                 };
             }
 
-            throw new Exception($"Account type not supported '{iban}' - '{currency}'");
+            return new Account
+            {
+                AccountType = CodaAccountType.Unknown,
+                AccountNumber = "",
+                CurrencyCode = currency ?? "EUR"
+            };
         }
     }
 }
