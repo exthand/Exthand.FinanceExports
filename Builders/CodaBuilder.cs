@@ -198,7 +198,16 @@ namespace Exthand.FinanceExports.Builders
             
             foreach (var transaction in TransactionList.Transactions)
             {
-                var communication = transaction.RemittanceStructuredRef ?? transaction.RemittanceUnstructured ?? (transaction.RemittanceUnstructured ?? "");
+                string communication = "";
+                if (transaction.RemittanceStructuredRef is not null)
+                    communication = transaction.RemittanceStructuredRef;
+                else
+                {
+                    if (transaction.RemittanceUnstructured is not null)
+                        communication = transaction.RemittanceUnstructured;
+                    else
+                        communication = "-";
+                }
                 bool hasDetailedCommunication = transaction.RemittanceUnstructured != null && (transaction.RemittanceUnstructured.Length > 53 || transaction.RemittanceUnstructured.Contains("\n"));
                 bool hasURL = !(string.IsNullOrEmpty(transaction.URLExtended)) ? true : false;
                 var communicationType = transaction.RemittanceUnstructured != null
