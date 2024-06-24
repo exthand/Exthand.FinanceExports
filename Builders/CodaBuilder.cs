@@ -108,7 +108,7 @@ namespace Exthand.FinanceExports.Builders
                 BankIdentificationNumber = 0,
                 FileReference = null,
                 AccountHolderName = TransactionList.IBANAccountDescription,
-                Bic = "", // TODO
+                Bic = "", // TODO: Add BIC INFO
                 CompanyNumber = TransactionList.CompanyVAT,
                 SeparateApplication = 0,
                 TransactionReference = null,
