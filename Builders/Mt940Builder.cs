@@ -119,7 +119,7 @@ namespace Exthand.FinanceExports.Builders
         private void WriteTransactions(TransactionList transactionList)
         {
             string transactionLine = "";
-            foreach (Transaction transaction in transactionList.Transactions)
+            foreach (Transaction transaction in transactionList.Transactions.Where(s=>s.StatementType is null))
             {
                 transactionLine = $":61:{transaction.DateValue.Value:yyMMdd}{transaction.DateExecution.Value:MMdd}{GetMoney(transaction.Amount)}";
                 transactionLine += $"N099//{Clean(transaction.RemittanceUnstructured, 16)}";

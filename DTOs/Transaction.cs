@@ -141,6 +141,8 @@ namespace Exthand.FinanceExports
         public string? URLExtended { get; set; }
 
         public int StatementNumber { get; set; }
+        
+        public string StatementType { get; set; }
 
     }
 }

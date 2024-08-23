@@ -6,8 +6,9 @@
     <Authors>Jean-Gabriel Debaille</Authors>
     <Company>EXTHAND SA</Company>
     <Product>Exthand:Finances Export STD2</Product>
-    <Copyright>EXTHAND 2023</Copyright>
+    <Copyright>EXTHAND 2024</Copyright>
     <PackageProjectUrl>https://www.exthand.com</PackageProjectUrl>
+      <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>logo-240.png</PackageIcon>
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/exthand/Exthand.FinanceExports</RepositoryUrl>
@@ -15,10 +16,10 @@
     <PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
     <Description>This library allows you to generate MT940, CODA, CAMT053, CSV, HTML and PDF files from bank transactions records.</Description>
     <PackageTags>psd2 openbanking exthand mt940 camt053 coda</PackageTags>
-    <PackageVersion>1.0.18</PackageVersion>
-    <AssemblyVersion>1.1.0</AssemblyVersion>
-    <FileVersion>1.1.0</FileVersion>
-    <Version>1.1.0-</Version>
+    <PackageVersion>1.2.0-alpha</PackageVersion>
+    <AssemblyVersion>1.2.0</AssemblyVersion>
+    <FileVersion>1.2.0</FileVersion>
+    <Version>1.2.0-</Version>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -48,7 +49,7 @@
     <None Include="Exthand.FinanceExports.csproj" />
   </ItemGroup>
     <ItemGroup>
-      <Content Include="README.md" />
+      <None Include="README.md"  Pack="true" PackagePath="\"/>
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Models\" />

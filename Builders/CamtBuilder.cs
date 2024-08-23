@@ -162,7 +162,7 @@ namespace Exthand.FinanceExports.Builders
 
         private TotalTransactions2 GetTransactionSummary()
         {
-            var sum = TransactionList.Transactions.Sum(t => t.Amount);
+            var sum = TransactionList.Transactions.Where(t=>t.StatementType is null).Sum(t => t.Amount);
 
             var summary = new TotalTransactions2
             {
@@ -178,18 +178,18 @@ namespace Exthand.FinanceExports.Builders
                 }
             };
 
-            var sumCredit = TransactionList.Transactions.Where(t => t.Amount >= 0).Sum(t => t.Amount);
+            var sumCredit = TransactionList.Transactions.Where(t => t.Amount >= 0 && t.StatementType is null).Sum(t => t.Amount);
             summary.TtlCdtNtries = new NumberAndSumOfTransactions1
             {
-                NbOfNtries = $"{TransactionList.Transactions.Where(t => t.Amount >= 0).Count()}",
+                NbOfNtries = $"{TransactionList.Transactions.Where(t => t.Amount >= 0 && t.StatementType is null).Count()}",
                 Sum = Math.Abs(sumCredit),
                 SumSpecified = true
             };
             
-            var sumDebit = TransactionList.Transactions.Where(t => t.Amount < 0).Sum(t => t.Amount);
+            var sumDebit = TransactionList.Transactions.Where(t => t.Amount < 0 && t.StatementType is null).Sum(t => t.Amount);
             summary.TtlDbtNtries = new NumberAndSumOfTransactions1
             {
-                NbOfNtries = $"{TransactionList.Transactions.Where(t => t.Amount < 0).Count()}",
+                NbOfNtries = $"{TransactionList.Transactions.Where(t => t.Amount < 0 && t.StatementType is null).Count()}",
                 Sum = Math.Abs(sumDebit),
                 SumSpecified = true
             };
@@ -199,7 +199,7 @@ namespace Exthand.FinanceExports.Builders
 
         private IEnumerable<ReportEntry3> GetEntries()
         {
-            return TransactionList.Transactions.Select(GetEntry);
+            return TransactionList.Transactions.Where(t=>t.StatementType is null).Select(GetEntry);
         }
 
         private ReportEntry3 GetEntry(Transaction transaction)

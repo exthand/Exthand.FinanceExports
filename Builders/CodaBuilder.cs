@@ -175,7 +175,7 @@ namespace Exthand.FinanceExports.Builders
             {
                 SequenceNumber = 1,
                 DetailNumber = 0,
-                Communication = $"EXTHAND.COM CODA GENERATOR V1.0.9 {DateTime.UtcNow.ToString("yyyyMMddHHmmss")}",
+                Communication = $"EXTHAND.COM CODA GENERATOR V1.2.0 {DateTime.UtcNow.ToString("yyyyMMddHHmmss")}",
                 LinkCode = true
             });
 
@@ -196,7 +196,7 @@ namespace Exthand.FinanceExports.Builders
         {
             var contSeqNbr = 1;
             
-            foreach (var transaction in TransactionList.Transactions)
+            foreach (var transaction in TransactionList.Transactions.Where(t=>t.StatementType is null))
             {
                 string communication = "";
                 if (transaction.RemittanceStructuredRef is not null)

@@ -39,7 +39,7 @@ namespace Exthand.FinanceExports.Builders
             Result = Result.Replace("{closingBalanceDate}", TransactionList.DateOfLastTransaction.Value.AddDays(-1).ToString("dd/MM/yyyy"))
                 .Replace("{closingBalanceDateAmount}", $"{TransactionList.BalanceClosing.ToString("F2", nfi)} {TransactionList.Currency}");
 
-            if (TransactionList.Transactions.Count() == 0)
+            if (TransactionList.Transactions.Where(t=>t.StatementType is null).Count() == 0)
             {
                 Result = Result.Replace("{transactions}", string.Empty);
             }
@@ -48,7 +48,7 @@ namespace Exthand.FinanceExports.Builders
                 var htmlTransaction = EmbeddedResourceHelper.GetEmbeddedResource("Resources.codaHtmlTransaction.html");
                 var stringBuilder = new StringBuilder();
 
-                foreach (var transaction in TransactionList.Transactions)
+                foreach (var transaction in TransactionList.Transactions.Where(t=>t.StatementType is null))
                 {
                     var communication = transaction.RemittanceUnstructured + "<br/>" + transaction.RemittanceStructuredRef;
 
