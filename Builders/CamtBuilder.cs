@@ -102,9 +102,9 @@ namespace Exthand.FinanceExports.Builders
             return new AccountStatement3
             {
                 Id = TransactionList.TransactionId + "-000001",
-                ElctrncSeqNb = 0,
+                ElctrncSeqNb = (TransactionList.Transactions is not null && TransactionList.Transactions.Count>0)? TransactionList.Transactions.First().StatementNumber:0,
                 ElctrncSeqNbSpecified = true,
-                LglSeqNb = 0,
+                LglSeqNb = (TransactionList.Transactions is not null && TransactionList.Transactions.Count>0)? TransactionList.Transactions.First().StatementNumber:0,
                 LglSeqNbSpecified = true,
                 CreDtTm = _today,
                 FrToDt = new DateTimePeriodDetails
