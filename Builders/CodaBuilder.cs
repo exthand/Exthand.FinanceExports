@@ -45,6 +45,9 @@ namespace Exthand.FinanceExports.Builders
             }
             _account = CodaAccountHelper.ParseAccount(transactionList.IBANAccount, transactionList.Currency);
 
+            // We set as the reation date of the file at the same datetime as the first transaction.
+            _now = transactionList.Transactions.First().DateValue.HasValue? transactionList.Transactions.First().DateValue.Value : DateTime.Now;
+            
             GenerateCodaHeader();
             GenerateOpeningBalanceRecord();
             GenerateTransactionRecords();
@@ -94,7 +97,6 @@ namespace Exthand.FinanceExports.Builders
         {
             CodaLines = new List<ICodaLineType>();
             _account = null;
-            _now = DateTime.Now;
         }
 
         /// <summary>
@@ -102,18 +104,19 @@ namespace Exthand.FinanceExports.Builders
         /// </summary>
         private void GenerateCodaHeader()
         {
-            CodaLines.Add(new CodaLineType0
-            {
-                CreationDate = _now.Date,
-                BankIdentificationNumber = 0,
-                FileReference = null,
-                AccountHolderName = TransactionList.IBANAccountDescription,
-                Bic = "", // TODO: Add BIC INFO
-                CompanyNumber = TransactionList.CompanyVAT,
-                SeparateApplication = 0,
-                TransactionReference = null,
-                RelatedReference = null
-            });
+            CodaLineType0 codaLineType0 = new CodaLineType0();
+            codaLineType0.CreationDate = _now.Date;
+            codaLineType0.BankIdentificationNumber = 0;
+            codaLineType0.FileReference = null;
+            codaLineType0.AccountHolderName = TransactionList.IBANAccountDescription;
+            codaLineType0.Bic = "";
+            codaLineType0.CompanyNumber = TransactionList.CompanyVAT;
+            codaLineType0.SeparateApplication = 0;
+            codaLineType0.TransactionReference = null;
+            codaLineType0.RelatedReference = null;
+            
+            CodaLines.Add(codaLineType0);
+            
         }
 
 
