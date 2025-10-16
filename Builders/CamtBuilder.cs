@@ -130,8 +130,8 @@ namespace Exthand.FinanceExports.Builders
         {
             return new List<CashBalance3>
             {
-                GetBalance(new Balance(){Amount = TransactionList.BalanceOpening, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfFirstTransaction.Value.AddDays(-1)}, true),
-                GetBalance(new Balance(){Amount = TransactionList.BalanceClosing, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfLastTransaction.Value.AddDays(-1)}, false)
+                GetBalance(new Balance(){Amount = TransactionList.BalanceOpening, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfFirstTransaction.Value}, true),
+                GetBalance(new Balance(){Amount = TransactionList.BalanceClosing, Computed = true, Currency = TransactionList.Currency, ReferenceDate = TransactionList.DateOfLastTransaction.Value}, false)
             };
         }
 
