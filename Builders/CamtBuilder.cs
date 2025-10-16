@@ -79,7 +79,7 @@ namespace Exthand.FinanceExports.Builders
         {
             CamtDocument = null;
             _id = Guid.NewGuid();
-            _today = DateTime.Today;
+            _today = DateTime.UtcNow;
         }
 
         private GroupHeader58 GetHeader()
@@ -154,7 +154,7 @@ namespace Exthand.FinanceExports.Builders
                 CdtDbtInd = (balance?.Amount ?? 0) >= 0 ? CreditDebitCode.CRDT : CreditDebitCode.DBIT,
                 Dt = new DateAndDateTimeChoice
                 {
-                    Item = balance?.ReferenceDate ?? (isOpeningBalance ? TransactionList.DateOfFirstTransaction.Value.AddDays(-1) : TransactionList.DateOfLastTransaction.Value)
+                    Item = balance?.ReferenceDate ?? (isOpeningBalance ? TransactionList.DateOfFirstTransaction.Value : TransactionList.DateOfLastTransaction.Value)
                 }
             };
         }

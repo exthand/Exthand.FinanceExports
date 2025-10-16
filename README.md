@@ -12,3 +12,7 @@ Includes new info in CAMT files
 
 First line of CODA file, specifying the date of the creation file as been replaced by the date of the first transaction 
 to avoid compatibility issues with accouting softwares like WinBooks.
+
+## Version 1.4.0
+
+Updated CAMT053 exports to have opening date same as closing date if same day.
