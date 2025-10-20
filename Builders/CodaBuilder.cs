@@ -178,7 +178,7 @@ namespace Exthand.FinanceExports.Builders
             {
                 SequenceNumber = 1,
                 DetailNumber = 0,
-                Communication = $"EXTHAND.COM CODA GENERATOR V1.2.0 {DateTime.UtcNow.ToString("yyyyMMddHHmmss")}",
+                Communication = $"EXTHAND.COM CODA GENERATOR V1.4.x {DateTime.UtcNow.ToString("yyyyMMddHHmmss")}",
                 LinkCode = true
             });
 

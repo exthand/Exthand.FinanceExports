@@ -87,7 +87,7 @@ namespace Exthand.FinanceExports.Builders
             return new GroupHeader58
             {
                 MsgId = _id.ToString("N").Substring(0, 20),
-                CreDtTm = _today,
+                CreDtTm = _today.ToUniversalTime(),
                 MsgPgntn = new Pagination
                 {
                     PgNb = "1",
@@ -109,7 +109,7 @@ namespace Exthand.FinanceExports.Builders
                 CreDtTm = _today,
                 FrToDt = new DateTimePeriodDetails
                 {
-                    FrDtTm = TransactionList.DateOfFirstTransaction.Value,
+                    FrDtTm = TransactionList.DateOfFirstTransaction.Value.Date,
                     ToDtTm = TransactionList.DateOfLastTransaction.Value
                 },
                 Acct = new CashAccount25
@@ -154,7 +154,7 @@ namespace Exthand.FinanceExports.Builders
                 CdtDbtInd = (balance?.Amount ?? 0) >= 0 ? CreditDebitCode.CRDT : CreditDebitCode.DBIT,
                 Dt = new DateAndDateTimeChoice
                 {
-                    Item = balance?.ReferenceDate ?? (isOpeningBalance ? TransactionList.DateOfFirstTransaction.Value : TransactionList.DateOfLastTransaction.Value)
+                    Item = balance?.ReferenceDate ?? (isOpeningBalance ? TransactionList.DateOfFirstTransaction.Value.Date : TransactionList.DateOfLastTransaction.Value.Date)
                 }
             };
         }
