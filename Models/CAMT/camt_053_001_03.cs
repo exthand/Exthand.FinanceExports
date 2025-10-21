@@ -10,7 +10,7 @@
 
 using System.Xml.Serialization;
 
-namespace Exthand.FinanceExports.Models.Camt
+namespace Exthand.FinanceExports.Models.Camt53
 {
 
     // 
@@ -25,7 +25,7 @@ namespace Exthand.FinanceExports.Models.Camt
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:iso:std:iso:20022:tech:xsd:camt.053.001.03")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:iso:std:iso:20022:tech:xsd:camt.053.001.03", IsNullable = false)]
-    public partial class Document
+    public partial class Document53
     {
 
         private BankToCustomerStatementV03 bkToCstmrStmtField;

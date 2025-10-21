@@ -53,10 +53,8 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Models\" />
-      <Folder Include="Models\CAMT\" />
       <Folder Include="Models\CODA\" />
       <Folder Include="Models\CSV\" />
-      <Folder Include="Builders\" />
       <Folder Include="Helpers\" />
       <Folder Include="Resources\" />
       <Folder Include="DTOs\" />

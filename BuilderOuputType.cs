@@ -4,8 +4,9 @@
     {
         HTML = 0,
         CODA = 1,
-        CAMT = 2,
+        CAMT53 = 2,
         MT940 = 3,
-        CSV = 4
+        CSV = 4,
+        CAMT52=5
     }
 }

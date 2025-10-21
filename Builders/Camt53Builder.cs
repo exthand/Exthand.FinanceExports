@@ -1,7 +1,5 @@
 ﻿using Exthand.FinanceExports.Helpers;
 using Exthand.FinanceExports.Models;
-using Exthand.FinanceExports.Models.Camt;
-using Exthand.FinanceExports.Models.Coda;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Transactions;
 using System.Xml.Serialization;
+using Exthand.FinanceExports.Models.Camt53;
 
 namespace Exthand.FinanceExports.Builders
 {
-    public class CamtBuilder : BaseBuilder
+    public class Camt53Builder : BaseBuilder
     {
-        public Document CamtDocument { get; private set; }
+        public Document53 Camt53Document { get; private set; }
 
         private Guid _id;
         private DateTime _today;
@@ -28,7 +27,7 @@ namespace Exthand.FinanceExports.Builders
             TransactionList = transactionList;
             ResetBuilder();
 
-            CamtDocument = new Document
+            Camt53Document = new Document53
             {
                 BkToCstmrStmt = new BankToCustomerStatementV03
                 {
@@ -52,8 +51,8 @@ namespace Exthand.FinanceExports.Builders
         public override Stream GetResultAsStream()
         {
             var memoryStream = new MemoryStream();
-            var serializer = new XmlSerializer(typeof(Document));
-            serializer.Serialize(memoryStream, CamtDocument);
+            var serializer = new XmlSerializer(typeof(Document53));
+            serializer.Serialize(memoryStream, Camt53Document);
             return memoryStream;
         }
 
@@ -64,8 +63,8 @@ namespace Exthand.FinanceExports.Builders
         {
             using (var stringwriter = new ExtentedStringWriter(Encoding.UTF8))
             {
-                var serializer = new XmlSerializer(typeof(Document));
-                serializer.Serialize(stringwriter, CamtDocument);
+                var serializer = new XmlSerializer(typeof(Document53));
+                serializer.Serialize(stringwriter, Camt53Document);
                 return stringwriter.ToString();
             }
         }
@@ -77,7 +76,7 @@ namespace Exthand.FinanceExports.Builders
         /// </summary>
         private void ResetBuilder()
         {
-            CamtDocument = null;
+            Camt53Document = null;
             _id = Guid.NewGuid();
             _today = DateTime.UtcNow;
         }

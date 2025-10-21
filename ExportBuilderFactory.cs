@@ -12,8 +12,10 @@ namespace Exthand.FinanceExports
             {
                 switch (outputType)
                 {
-                    case BuilderOuputType.CAMT:
-                        return (IBaseExportBuilder<T>)new CamtBuilder();
+                    case BuilderOuputType.CAMT53:
+                        return (IBaseExportBuilder<T>)new Camt53Builder();
+                    case BuilderOuputType.CAMT52:
+                        return (IBaseExportBuilder<T>)new Camt52Builder();
                     case BuilderOuputType.MT940:
                         return (IBaseExportBuilder<T>)new Mt940Builder();
                     case BuilderOuputType.CODA:
